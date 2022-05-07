@@ -5,14 +5,14 @@ urlencode () {
 }
 
 PLAYLIST="$1"
-#PLAYLIST="https://soundcloud.com/user-332362291/sets/set-neuro"
+
 PLAYLIST_ENC="https://genmp3.net/tracks.php?u=$(urlencode $PLAYLIST)"
 
 HTML_FILENAME=${PLAYLIST##*/}.html
 SONG_FILENAME=${HTML_FILENAME/html/names.txt}
 
-#google-chrome-stable --headless --dump-dom "$PLAYLIST_ENC" > $HTML_FILENAME \
-#    2>/dev/null || exit 1
+google-chrome-stable --headless --dump-dom "$PLAYLIST_ENC" > $HTML_FILENAME \
+    2>/dev/null || exit 1
 
 grep "<a href=\"#\" title=\"Download " $HTML_FILENAME \
     | cut -d '>' -f 3 | cut -d '<' -f 1 | sed '/^[[:space:]]*$/d' \
