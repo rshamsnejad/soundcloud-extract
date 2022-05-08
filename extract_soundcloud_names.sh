@@ -18,6 +18,9 @@ grep "<a href=\"#\" title=\"Download " $HTML_FILENAME \
     | cut -d '>' -f 3 | cut -d '<' -f 1 | sed '/^[[:space:]]*$/d' \
     > $SONG_FILENAME
 
+echo -e "HTML file :\t\t./$HTML_FILENAME"
+echo -e "Extracted titles file :\t./$SONG_FILENAME"
+
 TOTAL=$(wc -l < $SONG_FILENAME)
 CURRENT=1
 
